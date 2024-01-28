@@ -30,27 +30,41 @@ int main()
         ll n,p,x,a;
         cin>>n>>p>>x>>a;
         ll b[n];
-        ll temp[n];
+        ll prefix[n];
         for(ll i=0;i<n;i++)
         {
             cin>>b[i];
-        }
 
+        }
+        prefix[0]=b[0];
+        for(int i=1;i<n;i++)
+        {
+            prefix[i]=prefix[i-1]+b[i];
+        }
+        ll sumA[n];
+        priority_queue<int, vector<int>, greater<int> > g;
+        ll sum=0;
+        for(int i=0;i<a;i++)
+        {
+            g.push(b[i]);
+            sum+=b[i];
+        }
+        sumA[a-1]=sum;
+        for(int i=a;i<n;i++)
+        {
+            g.push(b[i]);
+            sum+=b[i];
+            sum-=g.top();
+            g.pop();
+            sumA[i]=sum;
+        }
+        ll ans;
         ll life=p+x;
         ll l=a,h=n;
-        ll ans;
         while(l<=h)
         {
-            ll mid=(l+h)/2;
-            equal(b,temp,n);
-            sort(temp,temp+mid);
-           // for(int i=0;i<n;i++)cout<<temp[i]<<" ";cout<<endl;
-            ll sum=0;
-            for(ll i=0;i<mid-a;i++)
-            {
-                sum+=temp[i];
-            }
-            if(sum<=life)
+            int mid=(l+h)/2;
+            if(prefix[mid-1]-sumA[mid-1]<=life)
             {
                 l=mid+1;
                 ans=mid;
@@ -58,6 +72,5 @@ int main()
             else h=mid-1;
         }
         cout<<ans<<endl;
-
     }
 }
