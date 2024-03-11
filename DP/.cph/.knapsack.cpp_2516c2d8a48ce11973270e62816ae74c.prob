@@ -1,0 +1,1 @@
+{"name":"Local: knapsack","url":"/home/abrar/WORKSPACE/CompetitiveProgramming/DP/knapsack.cpp","tests":[{"id":1709023757435,"input":"5 1\n3 5 2 11 9","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/abrar/WORKSPACE/CompetitiveProgramming/DP/knapsack.cpp","group":"local","local":true}
